@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+
+<nav>
+    {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <li><a href="{{ url_for('charts') }}">Result</a></li>
+    {% endif %}
+</nav>
+
+<h3 style="text-align: center;">{{ current_user.name }}</h3>
+
+{% if values %}
+<canvas id="historyChart" width="300" height="100"></canvas>
+<script>
+    const ctx = document.getElementById('historyChart');
+
+    new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: {{ labels | tojson }},
+            datasets: [{
+                label: 'CO₂ Emissions (kg)',
+                data: {{ values | tojson }},
+                borderColor: '#3498db',
+                backgroundColor: 'rgba(52, 152, 219, 0.2)',
+                fill: true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Your Carbon Footprint Over Time'
+                }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
+    });
+</script>
+{% else %}
+<p style="text-align: center;">You have no recorded carbon footprints yet.</p>
+{% endif %}
+
+{% endblock %}

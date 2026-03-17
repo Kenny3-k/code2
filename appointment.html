@@ -1,0 +1,33 @@
+{%extends "base.html"%}
+{%block content%}
+
+<h3 class="text-center mt-4">My Appointments</h3>
+
+{%if appointments%}
+<table class="table table-bordered mt-4">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Start Time</th>
+            <th>End Time</th>
+            <th>Location</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for appt in appointments %}
+        <tr>
+            <td>{{ appt.title }}</td>
+            <td>{{ appt.start_time }}</td>
+            <td>{{ appt.end_time }}</td>
+            <td>{{ appt.location if appt.location else "—" }}</td>
+            <td>{{ appt.description if appt.description else "—" }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p class="text-center mt-4">You have no scheduled appointments.</p>
+{% endif %}
+
+{% endblock %}

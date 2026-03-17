@@ -1,0 +1,47 @@
+{%extends "base.html"%}
+{%block content%}
+<h3>Carbon Footprint Calculator</h3>
+<p id="message"></p>
+<div class="container-page">
+    <form action="/calculate" method="post" onsubmit="return validateCalculator()">
+        <label>Electricity usuage (kwh/month): </label>
+        <input type="number" step="0.01" id="electricity" name="electricity" placeholder="electricity" required oninput="previewEmmissions()">
+
+        <label>Fuel consumption (litres/month): </label>
+        <input type="number" step="0.01" id="fuel" name="fuel" placeholder="fuel" required oninput="previewEmmissions()">
+
+        <label>Distance driven (km/month): </label>
+        <input type="number" step="0.01" id="distance" name="distance" placeholder="distance" required oninput="previewEmmissions()">
+        <label>Do you have solar panels?</label>
+        <select name="solar" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="no">No</option>
+            <option value="yes">Yes</option>
+        </select>
+
+        <button type="submit">Calculate</button>
+    </form>
+</div>
+<script>
+function validateCalculator(){
+    const electricity= document.getElementById("electricity").value;
+    if (electricity < 0){
+        alert ("Electricity value can not be negative");
+        return false;
+    }
+    return true;
+}
+</script>
+
+<script>
+    function previewEmmissions(){
+        const electricity= document.getElementById("electricity").value || 0;
+        const fuel= document.getElementById("fuel").value || 0;
+        const distance= document.getElementById("distance").value || 0;
+
+        const total= electricity*0.92 + fuel*2.31 + distance*0.12;
+
+        document.getElementById("message").innerText= "Estimated Emmissions: " + total.toFixed(2) + "kg CO2";
+    }
+</script>
+{%endblock%}

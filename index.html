@@ -1,0 +1,122 @@
+{% extends 'base.html'%}
+
+{% block content%}
+
+<script src="{{url_for('static', filename='js/chart.js')}}"></script>
+
+<header>
+    <h1 class="paragraph1">Welcome to Rolsa Technologies</h1>
+    <h3 class="paragraph2">Home Page</h3>
+    <nav>
+        <ul>
+            {%if current_user.is_authenticated%}
+            <li><a  class="nav-link" href="{{url_for('logout')}}">Logout</a></li>
+
+            {%else%}
+            <li><a class="nav-link" href="{{url_for('registration')}}">Register</a></li>
+            {%endif%}
+        </ul>
+    </nav>
+</header>
+
+<body>
+<h1> Live Grid Carbon Intensity (GB)</h1>
+<label>Select date:</label>
+<input type="date" id="date">
+<button onclick="loadChart()">Load</button>
+<canvas id="carbonChart" width="900" height="400"></canvas>
+<!-- <pre id="output"></pre> -->
+
+<!-- <script>
+    async function getLive(){
+        const date= document.getElementById("date").value;
+        const url= `/api/v1/live-carbon${date ? "?date=" + date: ""}`;
+        const res= await fetch(url);
+        const data= await res.json();
+        document.getElementById("output").innerText= JSON.stringify(data, null, 2);
+    
+    } -->
+<!-- </script> -->
+
+<script>
+    let chart;
+async function loadChart() {
+    const date= document.getElementById("date").value;
+    const res= await fetch(`/api/v1/live-carbon-chart?date=${date}`);
+    const data= await res.json();
+
+    const ctx= document.getElementById("carbonChart").getContext("2d")
+
+    if (chart){
+        chart.destroy();
+    }
+
+    chart= new Chart(ctx, {
+        type: "line",
+        data: {
+            labels : data.labels,
+            datasets:[{
+                label: `Carbon Intensity (${data.unit})`,
+                data: data.values,
+                borderColor: "green",
+                backgroundColor: "rgba(0, 128, 0, 0.1)",
+                tension: 0.3,
+                fill:true
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text:"Electricity Grid Varbon Intensity (Government Data)"
+                },
+                tooltip: {
+                    callbacks: {
+                        label: ctx => `${ctx.parsed.y} ${data.unit}`
+                    }
+                }
+            },
+            scales: {
+                y: {
+                    title: {
+                        display: true,
+                        text:data.unit
+                    }
+                },
+                x: {
+                    title: {
+                        display: true,
+                        text: "Time"
+                    }
+                }
+            }
+        }
+    });
+}
+</script>
+
+<main>
+    {%if current_user.is_authenticated%}
+    <h3 class="welcome-text">Hello {{current_user.name}}, Welcome Back!</h3>
+    {%else%}
+    <h3 class="welcome-text">Hello Guest, Welcome!</h3>
+    {%endif%}
+    <p id="home_page_write_up">At Rolsa Technologies, we bring reliable and innovative technical solutions to
+        individuals and businesses of all sizes.<br>
+        Our mission is to simplify technology so that it works seamlessly for you, whether you need help with system
+        setup, ongoing maintenance, troubleshooting, or expert guidance.<br>
+
+        With a focus on efficiency, security, and customer satisfaction, we provide tailored solutions that meet your
+        unique needs.
+        Our team of experienced professionals is committed to delivering fast, dependable support and keeping your
+        technology running smoothly.<br>
+
+        Explore our services to discover how we can enhance your digital environment, protect your systems, and help
+        your business or personal projects thrive.
+        At Rolsa Technologies, we do not just solve problems, we create opportunities for you to focus on what matters
+        most, confident that your technology is in good hands.</p>
+
+</main>
+</body>
+{% endblock %}

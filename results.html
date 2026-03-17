@@ -1,0 +1,45 @@
+{%extends "base.html"%}
+{%block content%}
+
+<h3 class="text-center mt-4">Your Carbon Footprints Results</h3>
+
+<!-- added result container -->
+ <div class="result-container">
+    <p class="total">
+        Total monthly CO2 emissions: <strong>{{total}} kg</strong>
+    </p>
+
+<!-- added a wrapper for the charts -->
+<div class="chart-container">
+    <canvas id="emissionChart"></canvas>
+</div>
+
+<h5 class="mt-4">Suggestions</h5>
+<ul class="Suggestions-list">
+    {%for s in suggestion%}
+    <li>{{s}}</li>
+    {%endfor%}
+</ul>
+
+ </div>
+
+<script>
+    const ctx= document.getElementById('emissionChart');
+    new Chart(ctx, {
+        type: 'pie',
+        data:{
+            labels:['Electricity', 'Fuel', 'Transport'],
+            datasets:[{
+                data: [{{electricity_emissions}},{{fuel_emissions}}, {{driving_emissions}}],
+                backgroundColor: ['#3498db', '#e67e22', '#2ecc71']
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins:{
+                title:{display:true, text: 'Emission Breakdown'}
+            }
+        }
+    });
+</script>
+ {%endblock%}

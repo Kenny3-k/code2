@@ -1,0 +1,28 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head> -->
+
+<!-- <body> -->
+{% extends 'base.html'%}
+
+{% block content%}    
+    <h3 class="paragraph2">LogIn Page</h3>
+    <form action="{{url_for('login')}}" method="post" class="login_menu">
+        <input type="email" name="email" placeholder="email" required/><br>
+        <input type="password" name="password" placeholder="Password " required/>
+        <input type="submit" value="Log In"/>
+        <p>New to our website?<br><a href="{{url_for('registration')}}">Click Here</a></p>
+    </form>
+{% if error %}
+    <p class="error">{{ error }}</p>
+{% endif %}
+{% endblock %}
+<!-- </body>
+
+</html> -->

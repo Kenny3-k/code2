@@ -1,0 +1,23 @@
+{%extends "base.html"%}
+{%block content%}
+<h3>Overall Carbon FOotprints of All Users</h3>
+<canvas id="usersChart" width="300" height="100"></canvas>
+<script>
+    const ctx= document.getElementById('usersChart');
+    new Chart(ctx, {
+        type: 'bar',
+        data:{
+            labels:{{labels | tojson}},
+            datasets:[{
+                label: 'Total C02 Emissions (kg)',
+                data: {{values | tojson}},
+                backgroundColor: "#1abc9c"
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {y: {beginAtZero: true}}
+        }
+    });
+</script>
+{%endblock%}

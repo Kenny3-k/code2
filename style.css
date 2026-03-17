@@ -1,0 +1,130 @@
+img{
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    box-shadow: 10px 10px 15px rgba(0,0,0,0.4);
+}
+body{
+    padding-bottom: 60px;
+}
+.paragraph1{
+    color: #3b81bc;
+    text-align: center;
+    text-shadow: 5px 5px 3px black;
+}
+.paragraph2{
+    color: #3b81bc;
+    text-align: center;
+}
+.main_menu{
+    position: sticky;
+    top: 0;
+    background-color: #78b6f5;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    list-style: none;      /* removes bullets */
+    padding: 0;            /* removes left indent */
+    margin: 0;
+    flex-wrap: nowrap;
+}
+.main_menu a{
+    min-width: 160px;
+    text-align: center;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffe6d6;
+    color: #3b81bc;
+    text-decoration: none;
+    font-weight: bold;
+    white-space: nowrap;
+}
+.main_menu li {
+    display: inline-block;
+}
+.main_menu a:hover{
+    background-color: #3b81bc;
+    color: #ffe6d6;
+}
+.login_menu{
+    background-color: #3b81bc;
+    text-align: center;
+    padding: 20px;
+    width: 300px;
+    opacity: 0.9;
+    border-radius: 10px;
+    background-position: 50px 50px;
+    margin: 0% auto;
+    display: flex;
+    flex-direction: column;
+}
+/*.login_menu label{
+    font-weight: bold;
+    color: #ffe6d6;
+    margin-bottom: 5px;
+    text-align: left;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: large;
+}*/
+.login_menu p{
+    color: #ffe6d6;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.login_menu input{
+    text-align: left;
+}
+.login_menu input[type="submit"]{
+    width: 200px;
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: #ffe6d6;
+    background-color: #78b6f5;
+    font-weight: bold;
+    border-radius: 5px;
+    display: block;
+    margin: 20px auto;
+    border: none;
+    cursor: pointer;
+}
+.login_menu a{
+    text-align: center;
+    text-decoration: none;
+}
+.login_menu a:hover{
+    color: #78b6f5;
+}
+#home_page_write_up{
+    text-align: left;
+    color: black;
+    font-family: Arial, Helvetica, sans-serif;
+}
+footer{
+    font-size: medium;
+    color: #ffe6d6;
+    background-color:#78b6f5;
+    text-align: center;
+    border: 5px black;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.container-page{
+    width: 300px;
+    position: relative;
+    background-color:#3b81bc ;
+    background-position: 50 px 50px;
+    padding: 20px;
+    margin: 100px auto;
+    text-align: center;
+    box-shadow: 0 0 10px;
+}
+.container-page label{
+    text-align: center;
+}
+.container-page button{
+    ]
+}
